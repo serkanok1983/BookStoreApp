@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Book Store</string>
+    <string name="action_delete_all_entries">Clear Book Database</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_save">Save</string>
+    <string name="empty_view_title_text">No book in inventory</string>
+    <string name="empty_view_subtitle_text">Get started by adding a book</string>
+    <string name="editor_activity_title_new_book">Add a Book</string>
+    <string name="editor_activity_title_edit_book">Edit Book</string>
+    <string name="editor_insert_book_successful">Book saved</string>
+    <string name="editor_insert_book_failed">Error with saving book</string>
+    <string name="editor_update_book_successful">Book updated</string>
+    <string name="editor_update_book_failed">Error with updating book</string>
+    <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
+    <string name="discard">Discard</string>
+    <string name="keep_editing">Keep Editing</string>
+    <string name="editor_delete_book_successful">Book deleted</string>
+    <string name="editor_delete_book_failed">Error with deleting book</string>
+    <string name="delete_dialog_msg">Delete this book?</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="category_title">Title</string>
+    <string name="hint_title">Book Title</string>
+    <string name="category_author">Author</string>
+    <string name="hint_author">Author\'s Name</string>
+    <string name="category_price">Price</string>
+    <string name="unit_book_price">USD</string>
+    <string name="category_quantity">Quantity</string>
+    <string name="unit_quantity">pcs</string>
+    <string name="category_supplier_name">Supplier Name</string>
+    <string name="category_supplier_phone_number">Supplier Phone</string>
+</resources>

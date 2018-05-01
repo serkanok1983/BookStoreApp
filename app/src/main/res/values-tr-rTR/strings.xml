@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kitap Mağazası</string>
+    <string name="action_delete_all_entries">Kitap Veritabanını Temizle</string>
+    <string name="action_delete">Sil</string>
+    <string name="action_save">Kaydet</string>
+    <string name="empty_view_title_text">Stokta kitap yok</string>
+    <string name="empty_view_subtitle_text">Bir kitap ekleyin</string>
+    <string name="editor_activity_title_new_book">Yeni Kitap</string>
+    <string name="editor_activity_title_edit_book">Kitap Güncelle</string>
+    <string name="editor_insert_book_successful">Kitap kaydedildi</string>
+    <string name="editor_insert_book_failed">Hata: kitap kaydedilemedi</string>
+    <string name="editor_update_book_successful">Kitap güncellendi</string>
+    <string name="editor_update_book_failed">Hata: kitap güncellenemedi</string>
+    <string name="unsaved_changes_dialog_msg">Değişiklikler iptal edilsin mi?</string>
+    <string name="discard">İptal et</string>
+    <string name="keep_editing">Güncellemeye devam et</string>
+    <string name="editor_delete_book_successful">Kitap silindi</string>
+    <string name="editor_delete_book_failed">Hata: kitap silinemedi</string>
+    <string name="delete_dialog_msg">Kitap silinsin mi?</string>
+    <string name="delete">Sil</string>
+    <string name="cancel">İptal</string>
+    <string name="category_title">Başlık</string>
+    <string name="category_author">Yazar</string>
+    <string name="category_price">Fiyat</string>
+    <string name="unit_book_price">TL</string>
+    <string name="category_quantity">Miktar</string>
+    <string name="category_supplier_name">Yayınevi</string>
+    <string name="category_supplier_phone_number">Yayınevi Telefon</string>
+    <string name="hint_author">Yazarın Adı</string>
+    <string name="hint_title">Kitap Başlığı</string>
+    <string name="unit_quantity">adet</string>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#F0514B</color>
+    <color name="colorPrimaryDark">#C0403C</color>
+    <color name="colorAccent">#F0514B</color>
+    <color name="editorColorPrimary">#2D3640</color>
+    <color name="editorColorPrimaryDark">#394450</color>
+    <color name="list_item_name_color">#2B3D4D</color>
+    <color name="list_item_summary_color">#AEB6BD</color>
+    <color name="subtitle_text_color">#A2AAB0</color>
+</resources>
