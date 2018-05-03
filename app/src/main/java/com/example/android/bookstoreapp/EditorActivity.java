@@ -42,6 +42,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private Button mQuantityIncrementButton;
     private Button mQuantityDecrementButton;
     private Button mSupplierPhoneCallButton;
+    private String quantityString;
+    private int quantity;
+    private String supplierPhoneString;
 
     private boolean mBookHasChanged = false;
 
@@ -86,16 +89,15 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mQuantityDecrementButton = findViewById(R.id.quantity_decrement_button);
         mSupplierPhoneCallButton = findViewById(R.id.supplier_phone_call_button);
 
-        final String quantityString = mQuantityEditText.getText().toString().trim();
-
         mQuantityIncrementButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int quantity = Integer.parseInt(quantityString);
+                quantityString = mQuantityEditText.getText().toString().trim();
                 if (!TextUtils.isEmpty(quantityString)) {
+                    quantity = Integer.parseInt(quantityString);
                     quantity += 1;
                 } else {
-                    Toast.makeText(getApplicationContext(), "Please enter quantity!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Please enter quantity manually by typing or using increment-decrement buttons!", Toast.LENGTH_SHORT).show();
                 }
                 mQuantityEditText.setText(Integer.toString(quantity));
             }
@@ -104,21 +106,22 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mQuantityDecrementButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int quantity = Integer.parseInt(quantityString);
+                quantityString = mQuantityEditText.getText().toString().trim();
                 if (!TextUtils.isEmpty(quantityString)) {
+                    quantity = Integer.parseInt(quantityString);
                     if (quantity > 0) {
                         quantity -= 1;
                     } else {
                         Toast.makeText(getApplicationContext(), "Quantity must be greater than 0!", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(), "Please enter quantity!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Please enter quantity manually by typing or using increment-decrement buttons!", Toast.LENGTH_SHORT).show();
                 }
                 mQuantityEditText.setText(Integer.toString(quantity));
             }
         });
 
-        final String supplierPhoneString = mSupplierPhoneEditText.getText().toString().trim();
+        supplierPhoneString = mSupplierPhoneEditText.getText().toString().trim();
 
         mSupplierPhoneCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,27 +151,21 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         if (TextUtils.isEmpty(titleString)) {
             Toast.makeText(this, "Title is empty! Please enter the book's title.", Toast.LENGTH_SHORT).show();
-            return;
         }
         if (TextUtils.isEmpty(authorString)) {
             Toast.makeText(this, "Author is empty! Please enter the book's author name.", Toast.LENGTH_SHORT).show();
-            return;
         }
         if (TextUtils.isEmpty(priceString)) {
             Toast.makeText(this, "Price is empty! Please enter the book's price.", Toast.LENGTH_SHORT).show();
-            return;
         }
         if (TextUtils.isEmpty(quantityString)) {
             Toast.makeText(this, "Quantity is empty! Please enter the book's quantity.", Toast.LENGTH_SHORT).show();
-            return;
         }
         if (TextUtils.isEmpty(supplierNameString)) {
             Toast.makeText(this, "Supplier name is empty! Please enter the book's supplier name.", Toast.LENGTH_SHORT).show();
-            return;
         }
         if (TextUtils.isEmpty(supplierPhoneString)) {
             Toast.makeText(this, "Supplier phone is empty! Please enter the book's supplier contact.", Toast.LENGTH_SHORT).show();
-            return;
         }
 
         ContentValues values = new ContentValues();

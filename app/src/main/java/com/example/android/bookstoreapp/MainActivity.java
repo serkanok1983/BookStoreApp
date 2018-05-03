@@ -15,10 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.android.bookstoreapp.data.BookContract.BookEntry;
 
@@ -26,7 +23,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private static final int BOOK_LOADER = 0;
     BookCursorAdapter mCursorAdapter;
-    private Button mSaleButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,23 +52,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 Uri currentBookUri = ContentUris.withAppendedId(BookEntry.CONTENT_URI, id);
                 intent.setData(currentBookUri);
                 startActivity(intent);
-            }
-        });
-
-        final TextView summaryQuantityTextView = findViewById(R.id.summary_quantity);
-        mSaleButton = findViewById(R.id.list_item_sale_button);
-        mSaleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Cursor cursor = mCursorAdapter.getCursor();
-                int quantityColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_QUANTITY);
-                int bookQuantity = cursor.getInt(quantityColumnIndex);
-                if (!(bookQuantity < 0)) {
-                    bookQuantity -= 1;
-                } else {
-                    Toast.makeText(getApplicationContext(), "Quantity must be greater than 0!", Toast.LENGTH_SHORT).show();
-                }
-                summaryQuantityTextView.setText(Integer.toString(bookQuantity));
             }
         });
 
