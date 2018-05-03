@@ -29,4 +29,5 @@
     <string name="unit_quantity">pcs</string>
     <string name="category_supplier_name">Supplier Name</string>
     <string name="category_supplier_phone_number">Supplier Phone</string>
+    <string name="button_sale_text">Sale</string>
 </resources>

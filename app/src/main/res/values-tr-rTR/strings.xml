@@ -30,4 +30,5 @@
     <string name="hint_author">Yazarın Adı</string>
     <string name="hint_title">Kitap Başlığı</string>
     <string name="unit_quantity">adet</string>
+    <string name="button_sale_text">Sat</string>
 </resources>

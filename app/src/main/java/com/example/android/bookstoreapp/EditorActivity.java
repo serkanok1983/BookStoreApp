@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -38,6 +39,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private EditText mQuantityEditText;
     private EditText mSupplierNameEditText;
     private EditText mSupplierPhoneEditText;
+    private Button mQuantityIncrementButton;
+    private Button mQuantityDecrementButton;
+    private Button mSupplierPhoneCallButton;
 
     private boolean mBookHasChanged = false;
 
@@ -64,12 +68,12 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             getLoaderManager().initLoader(EXISTING_BOOK_LOADER, null, this);
         }
 
-        mTitleEditText = (EditText) findViewById(R.id.edit_book_name);
-        mAuthorEditText = (EditText) findViewById(R.id.edit_book_author);
-        mPriceEditText = (EditText) findViewById(R.id.edit_book_price);
-        mQuantityEditText = (EditText) findViewById(R.id.edit_book_quantity);
-        mSupplierNameEditText = (EditText) findViewById(R.id.edit_supplier_name);
-        mSupplierPhoneEditText = (EditText) findViewById(R.id.edit_supplier_phone_number);
+        mTitleEditText = findViewById(R.id.edit_book_name);
+        mAuthorEditText = findViewById(R.id.edit_book_author);
+        mPriceEditText = findViewById(R.id.edit_book_price);
+        mQuantityEditText = findViewById(R.id.edit_book_quantity);
+        mSupplierNameEditText = findViewById(R.id.edit_supplier_name);
+        mSupplierPhoneEditText = findViewById(R.id.edit_supplier_phone_number);
 
         mTitleEditText.setOnTouchListener(mTouchListener);
         mAuthorEditText.setOnTouchListener(mTouchListener);
@@ -77,6 +81,53 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mQuantityEditText.setOnTouchListener(mTouchListener);
         mSupplierNameEditText.setOnTouchListener(mTouchListener);
         mSupplierPhoneEditText.setOnTouchListener(mTouchListener);
+
+        mQuantityIncrementButton = findViewById(R.id.quantity_increment_button);
+        mQuantityDecrementButton = findViewById(R.id.quantity_decrement_button);
+        mSupplierPhoneCallButton = findViewById(R.id.supplier_phone_call_button);
+
+        final String quantityString = mQuantityEditText.getText().toString().trim();
+
+        mQuantityIncrementButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int quantity = Integer.parseInt(quantityString);
+                if (!TextUtils.isEmpty(quantityString)) {
+                    quantity += 1;
+                } else {
+                    Toast.makeText(getApplicationContext(), "Please enter quantity!", Toast.LENGTH_SHORT).show();
+                }
+                mQuantityEditText.setText(Integer.toString(quantity));
+            }
+        });
+
+        mQuantityDecrementButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int quantity = Integer.parseInt(quantityString);
+                if (!TextUtils.isEmpty(quantityString)) {
+                    if (quantity > 0) {
+                        quantity -= 1;
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Quantity must be greater than 0!", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Please enter quantity!", Toast.LENGTH_SHORT).show();
+                }
+                mQuantityEditText.setText(Integer.toString(quantity));
+            }
+        });
+
+        final String supplierPhoneString = mSupplierPhoneEditText.getText().toString().trim();
+
+        mSupplierPhoneCallButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse(supplierPhoneString));
+                startActivity(intent);
+            }
+        });
     }
 
     private void saveBook() {
@@ -95,12 +146,37 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             return;
         }
 
+        if (TextUtils.isEmpty(titleString)) {
+            Toast.makeText(this, "Title is empty! Please enter the book's title.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (TextUtils.isEmpty(authorString)) {
+            Toast.makeText(this, "Author is empty! Please enter the book's author name.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (TextUtils.isEmpty(priceString)) {
+            Toast.makeText(this, "Price is empty! Please enter the book's price.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (TextUtils.isEmpty(quantityString)) {
+            Toast.makeText(this, "Quantity is empty! Please enter the book's quantity.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (TextUtils.isEmpty(supplierNameString)) {
+            Toast.makeText(this, "Supplier name is empty! Please enter the book's supplier name.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (TextUtils.isEmpty(supplierPhoneString)) {
+            Toast.makeText(this, "Supplier phone is empty! Please enter the book's supplier contact.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         ContentValues values = new ContentValues();
         values.put(BookEntry.COLUMN_BOOK_TITLE, titleString);
         values.put(BookEntry.COLUMN_BOOK_AUTHOR, authorString);
-        int price = 0;
+        double price = 0;
         if (!TextUtils.isEmpty(priceString)) {
-            price = Integer.parseInt(priceString);
+            price = Double.parseDouble(priceString);
         }
         values.put(BookEntry.COLUMN_PRICE, price);
         int quantity = 1;
@@ -230,14 +306,14 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
             String title = cursor.getString(titleColumnIndex);
             String author = cursor.getString(authorColumnIndex);
-            int price = cursor.getInt(priceColumnIndex);
+            double price = cursor.getDouble(priceColumnIndex);
             int quantity = cursor.getInt(quantityColumnIndex);
             String supplierName = cursor.getString(supplierNameColumnIndex);
             int supplierPhone = cursor.getInt(supplierPhoneColumnIndex);
 
             mTitleEditText.setText(title);
             mAuthorEditText.setText(author);
-            mPriceEditText.setText(Integer.toString(price));
+            mPriceEditText.setText(Double.toString(price));
             mQuantityEditText.setText(Integer.toString(quantity));
             mSupplierNameEditText.setText(supplierName);
             mSupplierPhoneEditText.setText(Integer.toString(supplierPhone));

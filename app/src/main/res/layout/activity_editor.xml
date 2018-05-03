@@ -15,17 +15,17 @@
         android:orientation="horizontal">
 
         <TextView
-            android:text="@string/category_title"
-            style="@style/CategoryStyle"/>
+            style="@style/CategoryStyle"
+            android:text="@string/category_title" />
 
         <EditText
             android:id="@+id/edit_book_name"
-            android:hint="@string/hint_title"
-            android:inputType="textCapWords"
+            style="@style/EditorFieldStyle"
             android:layout_width="0dp"
             android:layout_weight="2"
-            android:paddingLeft="@dimen/small_padding"
-            style="@style/EditorFieldStyle"/>
+            android:hint="@string/hint_title"
+            android:inputType="textCapWords"
+            android:paddingLeft="@dimen/small_padding" />
     </LinearLayout>
 
     <LinearLayout
@@ -35,18 +35,25 @@
         android:orientation="horizontal">
 
         <TextView
-            android:text="@string/category_author"
-            style="@style/CategoryStyle"/>
+            style="@style/CategoryStyle"
+            android:text="@string/category_author" />
 
         <EditText
             android:id="@+id/edit_book_author"
-            android:hint="@string/hint_author"
-            android:inputType="textCapWords"
+            style="@style/EditorFieldStyle"
             android:layout_width="0dp"
             android:layout_weight="2"
-            android:paddingLeft="@dimen/small_padding"
-            style="@style/EditorFieldStyle"/>
+            android:hint="@string/hint_author"
+            android:inputType="textCapWords"
+            android:paddingLeft="@dimen/small_padding" />
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/xsmall_padding"
+        android:layout_marginBottom="@dimen/activity_margin"
+        android:layout_marginTop="@dimen/activity_margin"
+        android:background="@color/subtitle_text_color" />
 
     <LinearLayout
         android:id="@+id/container_price"
@@ -55,23 +62,23 @@
         android:orientation="horizontal">
 
         <TextView
-            android:text="@string/category_price"
-            style="@style/CategoryStyle"/>
+            style="@style/CategoryStyle"
+            android:text="@string/category_price" />
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="2">
 
             <EditText
                 android:id="@+id/edit_book_price"
-                android:inputType="number"
-                style="@style/EditorFieldStyle"/>
+                style="@style/EditorFieldStyle"
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/label_price_units"
-                android:text="@string/unit_book_price"
-                style="@style/EditorUnitsStyle"/>
+                style="@style/EditorUnitsStyle"
+                android:text="@string/unit_book_price" />
         </RelativeLayout>
 
     </LinearLayout>
@@ -83,26 +90,58 @@
         android:orientation="horizontal">
 
         <TextView
-            android:text="@string/category_quantity"
-            style="@style/CategoryStyle"/>
+            style="@style/CategoryStyle"
+            android:text="@string/category_quantity" />
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="2">
 
             <EditText
                 android:id="@+id/edit_book_quantity"
-                android:inputType="number"
-                style="@style/EditorFieldStyle"/>
+                style="@style/EditorFieldStyle"
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/label_quantity_units"
-                android:text="@string/unit_quantity"
-                style="@style/EditorUnitsStyle"/>
+                style="@style/EditorUnitsStyle"
+                android:text="@string/unit_quantity" />
+
         </RelativeLayout>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/container_inc_dec_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/quantity_increment_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="+"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/quantity_decrement_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="-"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/xsmall_padding"
+        android:layout_marginBottom="@dimen/activity_margin"
+        android:layout_marginTop="@dimen/activity_margin"
+        android:background="@color/subtitle_text_color" />
 
     <LinearLayout
         android:id="@+id/container_supplier_name"
@@ -111,16 +150,16 @@
         android:orientation="horizontal">
 
         <TextView
-            android:text="@string/category_supplier_name"
-            style="@style/CategoryStyle"/>
+            style="@style/CategoryStyle"
+            android:text="@string/category_supplier_name" />
 
         <EditText
             android:id="@+id/edit_supplier_name"
-            android:inputType="textCapWords"
+            style="@style/EditorFieldStyle"
             android:layout_width="0dp"
             android:layout_weight="2"
-            android:paddingLeft="@dimen/small_padding"
-            style="@style/EditorFieldStyle"/>
+            android:inputType="textCapWords"
+            android:paddingLeft="@dimen/small_padding" />
     </LinearLayout>
 
     <LinearLayout
@@ -130,16 +169,32 @@
         android:orientation="horizontal">
 
         <TextView
-            android:text="@string/category_supplier_phone_number"
-            style="@style/CategoryStyle"/>
+            style="@style/CategoryStyle"
+            android:text="@string/category_supplier_phone_number" />
 
         <EditText
             android:id="@+id/edit_supplier_phone_number"
-            android:inputType="number"
+            style="@style/EditorFieldStyle"
             android:layout_width="0dp"
             android:layout_weight="2"
-            android:paddingLeft="@dimen/small_padding"
-            style="@style/EditorFieldStyle"/>
+            android:inputType="number"
+            android:paddingLeft="@dimen/small_padding" />
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/container_call_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/supplier_phone_call_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/ic_call_black_18dp" />
+
+    </RelativeLayout>
+
 
 </LinearLayout>

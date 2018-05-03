@@ -7,15 +7,18 @@ import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.bookstoreapp.data.BookContract.BookEntry;
 
@@ -23,13 +26,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private static final int BOOK_LOADER = 0;
     BookCursorAdapter mCursorAdapter;
+    private Button mSaleButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,20 +42,37 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         });
 
-        ListView bookListView = (ListView) findViewById(R.id.list);
+        ListView mBookListView = findViewById(R.id.list);
         View emptyView = findViewById(R.id.empty_view);
-        bookListView.setEmptyView(emptyView);
+        mBookListView.setEmptyView(emptyView);
 
         mCursorAdapter = new BookCursorAdapter(this, null);
-        bookListView.setAdapter(mCursorAdapter);
+        mBookListView.setAdapter(mCursorAdapter);
 
-        bookListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mBookListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, EditorActivity.class);
                 Uri currentBookUri = ContentUris.withAppendedId(BookEntry.CONTENT_URI, id);
                 intent.setData(currentBookUri);
                 startActivity(intent);
+            }
+        });
+
+        final TextView summaryQuantityTextView = findViewById(R.id.summary_quantity);
+        mSaleButton = findViewById(R.id.list_item_sale_button);
+        mSaleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Cursor cursor = mCursorAdapter.getCursor();
+                int quantityColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_QUANTITY);
+                int bookQuantity = cursor.getInt(quantityColumnIndex);
+                if (!(bookQuantity < 0)) {
+                    bookQuantity -= 1;
+                } else {
+                    Toast.makeText(getApplicationContext(), "Quantity must be greater than 0!", Toast.LENGTH_SHORT).show();
+                }
+                summaryQuantityTextView.setText(Integer.toString(bookQuantity));
             }
         });
 
@@ -63,7 +84,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         String[] projection = {
                 BookEntry._ID,
                 BookEntry.COLUMN_BOOK_TITLE,
-                BookEntry.COLUMN_BOOK_AUTHOR };
+                BookEntry.COLUMN_BOOK_AUTHOR,
+                BookEntry.COLUMN_QUANTITY,
+                BookEntry.COLUMN_PRICE};
         return new CursorLoader(this,
                 BookEntry.CONTENT_URI,
                 projection,
