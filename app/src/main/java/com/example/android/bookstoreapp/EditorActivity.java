@@ -151,21 +151,27 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         if (TextUtils.isEmpty(titleString)) {
             Toast.makeText(this, "Title is empty! Please enter the book's title.", Toast.LENGTH_SHORT).show();
+            return;
         }
         if (TextUtils.isEmpty(authorString)) {
             Toast.makeText(this, "Author is empty! Please enter the book's author name.", Toast.LENGTH_SHORT).show();
+            return;
         }
         if (TextUtils.isEmpty(priceString)) {
             Toast.makeText(this, "Price is empty! Please enter the book's price.", Toast.LENGTH_SHORT).show();
+            return;
         }
         if (TextUtils.isEmpty(quantityString)) {
             Toast.makeText(this, "Quantity is empty! Please enter the book's quantity.", Toast.LENGTH_SHORT).show();
+            return;
         }
         if (TextUtils.isEmpty(supplierNameString)) {
             Toast.makeText(this, "Supplier name is empty! Please enter the book's supplier name.", Toast.LENGTH_SHORT).show();
+            return;
         }
         if (TextUtils.isEmpty(supplierPhoneString)) {
             Toast.makeText(this, "Supplier phone is empty! Please enter the book's supplier contact.", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         ContentValues values = new ContentValues();
