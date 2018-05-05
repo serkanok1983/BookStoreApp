@@ -121,13 +121,12 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             }
         });
 
-        supplierPhoneString = mSupplierPhoneEditText.getText().toString().trim();
-
         mSupplierPhoneCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                supplierPhoneString = mSupplierPhoneEditText.getText().toString().trim();
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse(supplierPhoneString));
+                intent.setData(Uri.parse("tel:" + supplierPhoneString));
                 startActivity(intent);
             }
         });
