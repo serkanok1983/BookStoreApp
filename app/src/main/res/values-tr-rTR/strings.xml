@@ -33,4 +33,11 @@
     <string name="button_sale_text">Sat</string>
     <string name="editor_quantity_inc_dec_null_toast">Lütfen manuel olarak yada +/- kullanarak miktar giriniz!</string>
     <string name="editor_quantity_must_be_positive">Miktar 0\'dan küçük olamaz!</string>
+    <string name="editor_input_correct_info_toast_msg">Lütfen tüm alanları uygun şekilde doldurunuz.</string>
+    <string name="editor_null_input_title">Lütfen kitabın başlığını giriniz.</string>
+    <string name="editor_null_input_author">Lütfen kitabın yazar ismini giriniz.</string>
+    <string name="editor_null_input_price">Lütfen kitabın fiyatını giriniz.</string>
+    <string name="editor_null_input_quantity">Lütfen kitabın miktarını giriniz.</string>
+    <string name="editor_null_input_supplier_name">Lütfen yayınevini giriniz.</string>
+    <string name="editor_null_input_supplier_phone">Lütfen yayınevinin telefonunu giriniz.</string>
 </resources>

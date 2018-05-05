@@ -162,24 +162,49 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         && TextUtils.isEmpty(authorString) && TextUtils.isEmpty(priceString)
                 && TextUtils.isEmpty(quantityString) && TextUtils.isEmpty(supplierNameString)
                 && TextUtils.isEmpty(supplierPhoneString)) {
+            Toast.makeText(this, getString(R.string.editor_input_correct_info_toast_msg), Toast.LENGTH_SHORT).show();
             return;
         }
 
         ContentValues values = new ContentValues();
-        values.put(BookEntry.COLUMN_BOOK_TITLE, titleString);
-        values.put(BookEntry.COLUMN_BOOK_AUTHOR, authorString);
-        double price = 0;
-        if (!TextUtils.isEmpty(priceString)) {
-            price = Double.parseDouble(priceString);
+        if (TextUtils.isEmpty(titleString)) {
+            Toast.makeText(this, getString(R.string.editor_null_input_title), Toast.LENGTH_SHORT).show();
+            return;
+        } else {
+            values.put(BookEntry.COLUMN_BOOK_TITLE, titleString);
         }
-        values.put(BookEntry.COLUMN_PRICE, price);
-        int quantity = 1;
-        if (!TextUtils.isEmpty(quantityString)) {
-            quantity = Integer.parseInt(quantityString);
+        if (TextUtils.isEmpty(authorString)) {
+            Toast.makeText(this, getString(R.string.editor_null_input_author), Toast.LENGTH_SHORT).show();
+            return;
+        } else {
+            values.put(BookEntry.COLUMN_BOOK_AUTHOR, authorString);
         }
-        values.put(BookEntry.COLUMN_QUANTITY, quantity);
-        values.put(BookEntry.COLUMN_SUPPLIER_NAME, supplierNameString);
-        values.put(BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER, supplierPhoneString);
+        if (TextUtils.isEmpty(priceString)) {
+            Toast.makeText(this, getString(R.string.editor_null_input_price), Toast.LENGTH_SHORT).show();
+            return;
+        } else {
+            double price = Double.parseDouble(priceString);
+            values.put(BookEntry.COLUMN_PRICE, price);
+        }
+        if (TextUtils.isEmpty(quantityString)) {
+            Toast.makeText(this, getString(R.string.editor_null_input_quantity), Toast.LENGTH_SHORT).show();
+            return;
+        } else {
+            int quantity = Integer.parseInt(quantityString);
+            values.put(BookEntry.COLUMN_QUANTITY, quantity);
+        }
+        if (TextUtils.isEmpty(supplierNameString)) {
+            Toast.makeText(this, getString(R.string.editor_null_input_supplier_name), Toast.LENGTH_SHORT).show();
+            return;
+        } else {
+            values.put(BookEntry.COLUMN_SUPPLIER_NAME, supplierNameString);
+        }
+        if (TextUtils.isEmpty(supplierPhoneString)) {
+            Toast.makeText(this, getString(R.string.editor_null_input_supplier_phone), Toast.LENGTH_SHORT).show();
+            return;
+        } else {
+            values.put(BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER, supplierPhoneString);
+        }
 
         if (mCurrentBookUri == null) {
 

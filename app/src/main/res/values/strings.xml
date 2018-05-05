@@ -32,4 +32,11 @@
     <string name="button_sale_text">Sale</string>
     <string name="editor_quantity_inc_dec_null_toast">Please enter quantity manually by typing or using increment-decrement buttons!</string>
     <string name="editor_quantity_must_be_positive">Quantity must be greater than 0!</string>
+    <string name="editor_input_correct_info_toast_msg">Please input all fields appropriately.</string>
+    <string name="editor_null_input_title">Please enter the book\'s title.</string>
+    <string name="editor_null_input_author">Please enter the book\'s author name.</string>
+    <string name="editor_null_input_price">Please enter the book\'s price.</string>
+    <string name="editor_null_input_quantity">Please enter the book\'s quantity.</string>
+    <string name="editor_null_input_supplier_name">Please enter the supplier\'s name.</string>
+    <string name="editor_null_input_supplier_phone">Please enter the supplier\'s contact.</string>
 </resources>
