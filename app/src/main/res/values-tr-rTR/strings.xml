@@ -31,4 +31,6 @@
     <string name="hint_title">Kitap Başlığı</string>
     <string name="unit_quantity">adet</string>
     <string name="button_sale_text">Sat</string>
+    <string name="editor_quantity_inc_dec_null_toast">Lütfen manuel olarak yada +/- kullanarak miktar giriniz!</string>
+    <string name="editor_quantity_must_be_positive">Miktar 0\'dan küçük olamaz!</string>
 </resources>

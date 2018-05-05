@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.android.bookstoreapp.data.BookContract.BookEntry;
+
 /**
  * Created by serka on 30.04.2018.
  */

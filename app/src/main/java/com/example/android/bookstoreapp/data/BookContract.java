@@ -10,11 +10,12 @@ import android.provider.BaseColumns;
 
 public class BookContract {
 
-    private BookContract() {}
-
     public static final String CONTENT_AUTHORITY = "com.example.android.bookstoreapp";
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
     public static final String PATH_BOOKS = "books";
+
+    private BookContract() {
+    }
 
     public static final class BookEntry implements BaseColumns {
 

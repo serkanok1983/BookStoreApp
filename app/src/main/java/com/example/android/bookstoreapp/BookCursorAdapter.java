@@ -18,9 +18,7 @@ import com.example.android.bookstoreapp.data.BookContract.BookEntry;
 
 public class BookCursorAdapter extends CursorAdapter {
 
-    private TextView summaryQuantityTextView;
     private int bookQuantity;
-
 
     public BookCursorAdapter(Context context, Cursor c) {
         super(context, c, 0);
@@ -32,17 +30,17 @@ public class BookCursorAdapter extends CursorAdapter {
     }
 
     @Override
-    public void bindView(View view, final Context context, Cursor cursor) {
+    public void bindView(View view, final Context context, final Cursor cursor) {
         TextView nameTextView = view.findViewById(R.id.name);
         TextView summaryTextView = view.findViewById(R.id.summary);
-        summaryQuantityTextView = view.findViewById(R.id.summary_quantity);
+        final TextView summaryQuantityTextView = view.findViewById(R.id.summary_quantity);
         TextView summaryPriceTextView = view.findViewById(R.id.summary_price);
         int titleColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_TITLE);
         int authorColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_AUTHOR);
         int quantityColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_QUANTITY);
         int priceColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_PRICE);
         String bookTitle = cursor.getString(titleColumnIndex);
-        String bookAuthor = cursor.getString(authorColumnIndex);
+        final String bookAuthor = cursor.getString(authorColumnIndex);
         bookQuantity = cursor.getInt(quantityColumnIndex);
         double bookPrice = cursor.getDouble(priceColumnIndex);
         nameTextView.setText(bookTitle);
@@ -54,9 +52,10 @@ public class BookCursorAdapter extends CursorAdapter {
             @Override
             public void onClick(View v) {
                 if (!(bookQuantity < 1)) {
+                    bookQuantity = Integer.parseInt(summaryQuantityTextView.getText().toString().trim());
                     bookQuantity -= 1;
                 } else {
-                    Toast.makeText(context, "Quantity must be greater than 0!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.editor_quantity_must_be_positive), Toast.LENGTH_SHORT).show();
                 }
                 summaryQuantityTextView.setText(Integer.toString(bookQuantity));
             }

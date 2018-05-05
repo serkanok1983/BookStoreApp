@@ -30,4 +30,6 @@
     <string name="category_supplier_name">Supplier Name</string>
     <string name="category_supplier_phone_number">Supplier Phone</string>
     <string name="button_sale_text">Sale</string>
+    <string name="editor_quantity_inc_dec_null_toast">Please enter quantity manually by typing or using increment-decrement buttons!</string>
+    <string name="editor_quantity_must_be_positive">Quantity must be greater than 0!</string>
 </resources>

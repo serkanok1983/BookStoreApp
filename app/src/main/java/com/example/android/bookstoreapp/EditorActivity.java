@@ -101,7 +101,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                     quantity = Integer.parseInt(quantityString);
                     quantity += 1;
                 } else {
-                    Toast.makeText(getApplicationContext(), "Please enter quantity manually by typing or using increment-decrement buttons!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.editor_quantity_inc_dec_null_toast), Toast.LENGTH_SHORT).show();
                 }
                 mQuantityEditText.setText(Integer.toString(quantity));
             }
@@ -116,10 +116,10 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                     if (quantity > 0) {
                         quantity -= 1;
                     } else {
-                        Toast.makeText(getApplicationContext(), "Quantity must be greater than 0!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), getString(R.string.editor_quantity_must_be_positive), Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(), "Please enter quantity manually by typing or using increment-decrement buttons!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.editor_quantity_inc_dec_null_toast), Toast.LENGTH_SHORT).show();
                 }
                 mQuantityEditText.setText(Integer.toString(quantity));
             }
