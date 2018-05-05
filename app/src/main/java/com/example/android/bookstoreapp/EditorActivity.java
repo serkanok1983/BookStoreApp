@@ -45,6 +45,10 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private String quantityString;
     private int quantity;
     private String supplierPhoneString;
+    private String titleString;
+    private String authorString;
+    private String priceString;
+    private String supplierNameString;
 
     private boolean mBookHasChanged = false;
 
@@ -132,46 +136,33 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         });
     }
 
+    private boolean userInputComplete() {
+
+        titleString = mTitleEditText.getText().toString().trim();
+        authorString = mAuthorEditText.getText().toString().trim();
+        priceString = mPriceEditText.getText().toString().trim();
+        quantityString = mQuantityEditText.getText().toString().trim();
+        supplierNameString = mSupplierNameEditText.getText().toString().trim();
+        supplierPhoneString = mSupplierPhoneEditText.getText().toString().trim();
+
+        return !(TextUtils.isEmpty(titleString) || TextUtils.isEmpty(authorString) || TextUtils.isEmpty(priceString)
+                || TextUtils.isEmpty(quantityString) || TextUtils.isEmpty(supplierNameString) || TextUtils.isEmpty(supplierPhoneString));
+    }
+
     private void saveBook() {
 
-        String titleString = mTitleEditText.getText().toString().trim();
-        String authorString = mAuthorEditText.getText().toString().trim();
-        String priceString = mPriceEditText.getText().toString().trim();
-        String quantityString = mQuantityEditText.getText().toString().trim();
-        String supplierNameString = mSupplierNameEditText.getText().toString().trim();
-        String supplierPhoneString = mSupplierPhoneEditText.getText().toString().trim();
+        titleString = mTitleEditText.getText().toString().trim();
+        authorString = mAuthorEditText.getText().toString().trim();
+        priceString = mPriceEditText.getText().toString().trim();
+        quantityString = mQuantityEditText.getText().toString().trim();
+        supplierNameString = mSupplierNameEditText.getText().toString().trim();
+        supplierPhoneString = mSupplierPhoneEditText.getText().toString().trim();
 
         if (mCurrentBookUri == null && TextUtils.isEmpty(titleString)
         && TextUtils.isEmpty(authorString) && TextUtils.isEmpty(priceString)
                 && TextUtils.isEmpty(quantityString) && TextUtils.isEmpty(supplierNameString)
                 && TextUtils.isEmpty(supplierPhoneString)) {
             return;
-        }
-
-        boolean userInputComplete;
-
-        userInputComplete = !(TextUtils.isEmpty(titleString) || TextUtils.isEmpty(authorString) || TextUtils.isEmpty(priceString)
-                || TextUtils.isEmpty(quantityString) || TextUtils.isEmpty(supplierNameString) || TextUtils.isEmpty(supplierPhoneString));
-
-        if (!userInputComplete) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(R.string.unsaved_changes_dialog_msg);
-            builder.setPositiveButton(R.string.discard, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    finish();
-                }
-            });
-            builder.setNegativeButton(R.string.keep_editing, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    if (dialog != null) {
-                        dialog.dismiss();
-                    }
-                }
-            });
-            AlertDialog alertDialog = builder.create();
-            alertDialog.show();
         }
 
         ContentValues values = new ContentValues();
@@ -232,8 +223,29 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_save:
-                saveBook();
-                finish();
+                if (!userInputComplete()) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setMessage(R.string.unsaved_changes_dialog_msg);
+                    builder.setPositiveButton(R.string.discard, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    });
+                    builder.setNegativeButton(R.string.keep_editing, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (dialog != null) {
+                                dialog.dismiss();
+                            }
+                        }
+                    });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                } else {
+                    saveBook();
+                    finish();
+                }
                 return true;
             case R.id.action_delete:
                 showDeleteConfirmationDialog();
