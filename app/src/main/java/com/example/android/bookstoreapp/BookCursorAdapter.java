@@ -1,5 +1,6 @@
 package com.example.android.bookstoreapp;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.view.LayoutInflater;
@@ -54,6 +55,14 @@ public class BookCursorAdapter extends CursorAdapter {
                 if (!(bookQuantity < 1)) {
                     bookQuantity = Integer.parseInt(summaryQuantityTextView.getText().toString().trim());
                     bookQuantity -= 1;
+                    ContentValues values = new ContentValues();
+                    values.put(BookEntry.COLUMN_QUANTITY, bookQuantity);
+                    int rowsAffected = context.getContentResolver().update(BookEntry.CONTENT_URI, values, null, null);
+                    if (rowsAffected == 0) {
+                        Toast.makeText(context, context.getString(R.string.editor_update_book_failed), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(context, context.getString(R.string.editor_update_book_successful), Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(context, context.getString(R.string.editor_quantity_must_be_positive), Toast.LENGTH_SHORT).show();
                 }
