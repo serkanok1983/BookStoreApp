@@ -57,17 +57,22 @@ public class BookCursorAdapter extends CursorAdapter {
         mSaleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!(bookQuantity < 1)) {
+                if (!((bookQuantity < 1))) {
                     bookQuantity = Integer.parseInt(summaryQuantityTextView.getText().toString().trim());
-                    bookQuantity -= 1;
+                    if (!((bookQuantity < 1))) {
+                        bookQuantity -= 1;
+                    } else {
+                        Toast.makeText(context, context.getString(R.string.editor_quantity_must_be_positive), Toast.LENGTH_SHORT).show();
+                    }
                     ContentValues values = new ContentValues();
                     values.put(BookEntry.COLUMN_QUANTITY, bookQuantity);
-
                     int rowsAffected = context.getContentResolver().update(bookUri, values, null, null);
                     if (rowsAffected == 0) {
                         Toast.makeText(context, context.getString(R.string.editor_update_book_failed), Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(context, context.getString(R.string.editor_update_book_successful), Toast.LENGTH_SHORT).show();
+                        if (!(bookQuantity < 1)) {
+                            Toast.makeText(context, context.getString(R.string.editor_update_book_successful), Toast.LENGTH_SHORT).show();
+                        }
                     }
                 } else {
                     Toast.makeText(context, context.getString(R.string.editor_quantity_must_be_positive), Toast.LENGTH_SHORT).show();
