@@ -1,8 +1,10 @@
 package com.example.android.bookstoreapp;
 
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +50,9 @@ public class BookCursorAdapter extends CursorAdapter {
         summaryTextView.setText(bookAuthor);
         summaryQuantityTextView.setText(Integer.toString(bookQuantity));
         summaryPriceTextView.setText(Double.toString(bookPrice));
+
+        String idColumn = cursor.getString(cursor.getColumnIndex(BookEntry._ID));
+        final Uri bookUri = ContentUris.withAppendedId(BookEntry.CONTENT_URI, Long.parseLong(idColumn));
         Button mSaleButton = view.findViewById(R.id.list_item_sale_button);
         mSaleButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +62,8 @@ public class BookCursorAdapter extends CursorAdapter {
                     bookQuantity -= 1;
                     ContentValues values = new ContentValues();
                     values.put(BookEntry.COLUMN_QUANTITY, bookQuantity);
-                    int rowsAffected = context.getContentResolver().update(BookEntry.CONTENT_URI, values, null, null);
+
+                    int rowsAffected = context.getContentResolver().update(bookUri, values, null, null);
                     if (rowsAffected == 0) {
                         Toast.makeText(context, context.getString(R.string.editor_update_book_failed), Toast.LENGTH_SHORT).show();
                     } else {

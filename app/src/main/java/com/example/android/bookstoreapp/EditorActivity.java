@@ -27,7 +27,7 @@ import com.example.android.bookstoreapp.data.BookContract.BookEntry;
  * Created by serka on 30.04.2018.
  */
 
-public class EditorActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
+public class EditorActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int EXISTING_BOOK_LOADER = 0;
 
@@ -159,7 +159,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         supplierPhoneString = mSupplierPhoneEditText.getText().toString().trim();
 
         if (mCurrentBookUri == null && TextUtils.isEmpty(titleString)
-        && TextUtils.isEmpty(authorString) && TextUtils.isEmpty(priceString)
+                && TextUtils.isEmpty(authorString) && TextUtils.isEmpty(priceString)
                 && TextUtils.isEmpty(quantityString) && TextUtils.isEmpty(supplierNameString)
                 && TextUtils.isEmpty(supplierPhoneString)) {
             Toast.makeText(this, getString(R.string.editor_input_correct_info_toast_msg), Toast.LENGTH_SHORT).show();
@@ -319,7 +319,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 BookEntry.COLUMN_PRICE,
                 BookEntry.COLUMN_QUANTITY,
                 BookEntry.COLUMN_SUPPLIER_NAME,
-                BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER };
+                BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER};
 
         return new CursorLoader(this,
                 mCurrentBookUri,
@@ -370,7 +370,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mSupplierPhoneEditText.setText("");
     }
 
-    private void showUnsavedChangesDialog (DialogInterface.OnClickListener discardButtonClickListener) {
+    private void showUnsavedChangesDialog(DialogInterface.OnClickListener discardButtonClickListener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.unsaved_changes_dialog_msg);
         builder.setPositiveButton(R.string.discard, discardButtonClickListener);
